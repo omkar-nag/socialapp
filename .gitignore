@@ -1,0 +1,31 @@
+# Binaries
+/bin/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+/build/
+dist/
+
+# Go test cache and coverage files
+*.test
+*.out
+*.coverprofile
+*.cov
+*.log
+
+# Editor & IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime*
+
+# Dependency directories (if using vendoring)
+vendor/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

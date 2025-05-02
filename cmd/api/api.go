@@ -7,9 +7,13 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/omkar-nag/socialapp/internal/store"
 )
 
-type application struct{ config config }
+type application struct {
+	config config
+	store  store.Storage
+}
 type config struct{ addr string }
 
 func (a *application) run(mux http.Handler) error {
