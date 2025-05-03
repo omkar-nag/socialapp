@@ -14,7 +14,18 @@ type application struct {
 	config config
 	store  store.Storage
 }
-type config struct{ addr string }
+
+type dbConfig struct {
+	addr         string
+	maxOpenConns int
+	maxIdleConns int
+	maxIdleTime  string
+}
+
+type config struct {
+	addr string
+	db   dbConfig
+}
 
 func (a *application) run(mux http.Handler) error {
 
