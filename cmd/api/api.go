@@ -25,6 +25,7 @@ type dbConfig struct {
 type config struct {
 	addr string
 	db   dbConfig
+	env  string
 }
 
 func (a *application) run(mux http.Handler) error {
@@ -46,6 +47,14 @@ func (app *application) mount() http.Handler {
 
 	r.Route("/v1", func(r chi.Router) {
 		r.Get("/health", app.healthCheckHandler)
+
+		//  /v1/posts
+		r.Route("/posts", func(r chi.Router) {
+			r.Post("/", app.createPostHandler)
+		})
+		r.Route("/users", func(r chi.Router) {
+			r.Post("/", app.createUserHandler)
+		})
 	})
 
 	return r
