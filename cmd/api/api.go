@@ -51,6 +51,11 @@ func (app *application) mount() http.Handler {
 		//  /v1/posts
 		r.Route("/posts", func(r chi.Router) {
 			r.Post("/", app.createPostHandler)
+			r.Route("/{postID}", func(r chi.Router) {
+				r.Get("/", app.getPostHandler)
+				// r.Patch("/", app.patchPostHandler)
+			})
+
 		})
 		r.Route("/users", func(r chi.Router) {
 			r.Post("/", app.createUserHandler)
