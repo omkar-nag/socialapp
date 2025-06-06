@@ -10,7 +10,7 @@ type Comment struct {
 	PostID    int64  `json:"post_id"`
 	Content   string `json:"content"`
 	CreatedAt string `json:"created_at"`
-	User      User   `json:"user"`
+	User      *User  `json:"user"`
 }
 
 type CommentStore struct {
@@ -26,6 +26,7 @@ func (s *CommentStore) Create(ctx context.Context, comment *Comment) error {
 		query,
 		comment.PostID,
 		comment.Content,
+		comment.User.ID, // Assuming User.ID is set before calling Create
 	).Scan(
 		&comment.ID,
 		&comment.CreatedAt,
@@ -55,7 +56,7 @@ func (s *CommentStore) GetByPostId(ctx context.Context, postID int64) ([]Comment
 	comments := []Comment{}
 	for rows.Next() {
 		var c Comment
-		c.User = User{}
+		c.User = &User{}
 		err := rows.Scan(
 			&c.ID,
 			&c.PostID,
